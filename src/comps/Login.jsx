@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useState } from "react";
 import auth from "../auth";
 
@@ -12,6 +12,9 @@ export default function Login() {
     auth.login(username, password);
   };
 
+  if (auth.loggedIn()) {
+    return <Navigate to="/sites" />;
+  }
   return (
     <section className="text-gray-600 body-font relative">
       <h1 className="pt-6 text-center text-3xl font-bold text-red-500">
