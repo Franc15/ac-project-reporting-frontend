@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function SiteItem() {
+export default function SiteItem(props) {
   return (
     <div className="p-4 md:w-1/3">
       <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -14,7 +14,7 @@ export default function SiteItem() {
             EASTERN ZONE
           </h2>
           <h1 className="title-foNament text-lg font-medium text-gray-900 mb-3">
-            Samora HQ
+            {props.site.site_name}
           </h1>
           <p className="leading-relaxed mb-3">
             Located in Dar es salaam. At the moment we are working on servicing

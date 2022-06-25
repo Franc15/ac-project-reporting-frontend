@@ -1,6 +1,34 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Axios from "axios";
 
 export default function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    Axios.post("https://ar-backend-ua6tbwojpa-uc.a.run.app/api/login", {
+      username,
+      password,
+    })
+      .then((res) => {
+        if (res.data.error) {
+          console.log(res.data.error);
+          setError(res.data.error);
+        } else {
+          console.log(res.data);
+          localStorage.setItem("token", res.data.token);
+          localStorage.setItem("user", JSON.stringify(res.data.user));
+          window.location.href = "/sites";
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <section className="text-gray-600 body-font relative">
       <h1 className="pt-6 text-center text-3xl font-bold text-red-500">
@@ -43,32 +71,38 @@ export default function Login() {
           <p className="leading-relaxed mb-5 text-gray-600">
             Input your details to sign in
           </p>
-          <div className="relative mb-4">
-            <label for="username" className="leading-7 text-sm text-gray-600">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <div className="relative mb-4">
-            <label for="password" className="leading-7 text-sm text-gray-600">
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-            />
-          </div>
-          <button className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
-            Sign In
-          </button>
-          <p className="text-xs text-gray-500 mt-3">We are signing you in...</p>
+          <form onSubmit={handleSubmit}>
+            <div className="relative mb-4">
+              <label for="username" className="leading-7 text-sm text-gray-600">
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                onChange={(e) => setUsername(e.target.value)}
+                className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <div className="relative mb-4">
+              <label for="password" className="leading-7 text-sm text-gray-600">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-white rounded border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              />
+            </div>
+            <button className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
+              Sign In
+            </button>
+            <p className="text-xs text-gray-500 mt-3">
+              We are signing you in...
+            </p>
+          </form>
         </div>
       </div>
     </section>

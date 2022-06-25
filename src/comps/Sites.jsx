@@ -1,6 +1,28 @@
 import SiteItem from "./SiteItem";
+import Axios from "axios";
+import { useState } from "react";
 
 export default function Sites() {
+  const [sites, setSites] = useState([]);
+
+  const getSites = () => {
+    Axios.get("https://ar-backend-ua6tbwojpa-uc.a.run.app/api/sites", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        setSites(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  console.log(localStorage.getItem("token"));
+  getSites();
+
   return (
     <section class="text-gray-600 body-font">
       <div className="p-4">
@@ -13,9 +35,9 @@ export default function Sites() {
       </div>
       <div className="container px-5 py-12 mx-auto">
         <div className="flex flex-wrap -m-4">
-          <SiteItem />
-          <SiteItem />
-          <SiteItem />
+          {sites.map((site) => {
+            return <SiteItem site={site} />;
+          })}
         </div>
       </div>
     </section>
