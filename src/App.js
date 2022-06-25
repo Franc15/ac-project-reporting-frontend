@@ -1,5 +1,13 @@
+import Floors from "./comps/Floors";
+import Login from "./comps/Login";
+import Rooms from "./comps/Rooms";
+import Signup from "./comps/Signup";
+import Sites from "./comps/Sites";
+
 export default function App() {
-  return (
-    <h1 className="text-3xl font-bold text-red-500 underline">Hello world!</h1>
-  );
+  // return <Login />;
+  // return <Signup />;
+  // return <Sites />;
+  // return <Floors />;
+  return <Rooms />;
 }
