@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { setCurrentSiteId } from "../utils/globalvars";
 
 export default function SiteItem(props) {
+  setCurrentSiteId(props.site.site_id);
   return (
     <div className="p-4 md:w-1/3">
       <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -22,7 +24,7 @@ export default function SiteItem(props) {
           </p>
           <div className="flex items-center flex-wrap ">
             <Link
-              to=""
+              to={`/floors/${props.site.site_id}`}
               className="text-red-500 hover:text-red-400 inline-flex items-center md:mb-2 lg:mb-0"
             >
               Get in

@@ -1,6 +1,7 @@
 import SiteItem from "./SiteItem";
 import Axios from "axios";
 import { useState } from "react";
+import auth from "../auth";
 
 export default function Sites() {
   const [sites, setSites] = useState([]);
@@ -20,14 +21,13 @@ export default function Sites() {
       });
   };
 
-  console.log(localStorage.getItem("token"));
   getSites();
 
   return (
     <section class="text-gray-600 body-font">
       <div className="p-4">
         <h1 className="text-4xl font-large title-font mb-4 text-gray-900">
-          Hey partner {localStorage.getItem("user").firstname}
+          Hello partner
         </h1>
         <p className="text-base leading-relaxed text-gray-600">
           Here are the sites you have access to

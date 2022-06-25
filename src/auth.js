@@ -21,6 +21,7 @@ class Auth {
           localStorage.setItem("user", JSON.stringify(res.data.user));
           this.token = res.data.token;
           this.user = res.data.user;
+
           window.location.href = "/sites";
         }
       })
@@ -43,6 +44,10 @@ class Auth {
 
   getUser() {
     return this.user;
+  }
+
+  getFirstName() {
+    return this.user.firstname;
   }
 }
 

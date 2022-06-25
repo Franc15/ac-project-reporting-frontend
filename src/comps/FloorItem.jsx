@@ -1,4 +1,4 @@
-export default function FloorItem() {
+export default function FloorItem(props) {
   return (
     <div className="xl:w-1/3 md:w-1/2 p-4">
       <div className="border border-gray-200 p-6 rounded-lg">
@@ -16,7 +16,7 @@ export default function FloorItem() {
           </svg> */}
         </div>
         <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
-          8th Floor
+          {props.floor.floor_level_name}
         </h2>
         <p className="leading-relaxed text-base">
           Fingerstache flexitarian street art 8-bit waist co, subway tile poke
