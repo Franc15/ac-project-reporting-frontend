@@ -2,7 +2,7 @@ import FloorItem from "./FloorItem";
 import { API_URL } from "../utils/links";
 
 import Axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function Floors() {
@@ -23,7 +23,10 @@ export default function Floors() {
         console.log(err);
       });
   };
-  getFloors();
+  useEffect(() => {
+    getFloors();
+  }, []);
+
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">

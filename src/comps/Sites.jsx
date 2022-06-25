@@ -1,6 +1,6 @@
 import SiteItem from "./SiteItem";
 import Axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import auth from "../auth";
 
 export default function Sites() {
@@ -21,7 +21,9 @@ export default function Sites() {
       });
   };
 
-  getSites();
+  useEffect(() => {
+    getSites();
+  }, []);
 
   return (
     <section class="text-gray-600 body-font">
