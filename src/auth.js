@@ -19,6 +19,8 @@ class Auth {
           console.log(res.data);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          this.token = res.data.token;
+          this.user = res.data.user;
           window.location.href = "/sites";
         }
       })
@@ -32,6 +34,7 @@ class Auth {
     this.user = null;
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    window.location.href = "/login";
   }
 
   loggedIn() {

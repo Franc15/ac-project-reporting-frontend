@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import auth from "../auth";
 
 export default function Navbar() {
   return (
@@ -27,7 +28,10 @@ export default function Navbar() {
             Home
           </Link>
         </nav>
-        <button className="inline-flex items-center bg-red-300 border-0 py-1 px-3 focus:outline-none hover:bg-red-400 rounded text-base mt-4 md:mt-0">
+        <button
+          onClick={() => auth.logout()}
+          className="inline-flex items-center bg-red-300 border-0 py-1 px-3 focus:outline-none hover:bg-red-400 rounded text-base mt-4 md:mt-0"
+        >
           Sign Out
           <svg
             fill="none"
