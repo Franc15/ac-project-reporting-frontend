@@ -1,32 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Axios from "axios";
+import auth from "../auth";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    Axios.post("https://ar-backend-ua6tbwojpa-uc.a.run.app/api/login", {
-      username,
-      password,
-    })
-      .then((res) => {
-        if (res.data.error) {
-          console.log(res.data.error);
-          setError(res.data.error);
-        } else {
-          console.log(res.data);
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-          window.location.href = "/sites";
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+
+    auth.login(username, password);
   };
 
   return (
