@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function SiteItem() {
   return (
     <div className="p-4 md:w-1/3">
@@ -19,8 +21,8 @@ export default function SiteItem() {
             the AC for the third quarter.
           </p>
           <div className="flex items-center flex-wrap ">
-            <a
-              href=""
+            <Link
+              to=""
               className="text-red-500 hover:text-red-400 inline-flex items-center md:mb-2 lg:mb-0"
             >
               Get in
@@ -36,7 +38,7 @@ export default function SiteItem() {
                 <path d="M5 12h14"></path>
                 <path d="M12 5l7 7-7 7"></path>
               </svg>
-            </a>
+            </Link>
             <span className="text-yellow-400 mr-3 font-bold inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
               60
             </span>

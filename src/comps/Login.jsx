@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Login() {
   return (
     <section className="text-gray-600 body-font relative">
@@ -24,9 +26,9 @@ export default function Login() {
               <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">
                 WEBSITE
               </h2>
-              <a className="text-red-500 leading-relaxed">
+              <Link to="" className="text-red-500 leading-relaxed">
                 www.timeshorizon.co.tz
-              </a>
+              </Link>
               <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">
                 PHONE
               </h2>
