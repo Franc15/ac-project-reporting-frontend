@@ -1,6 +1,13 @@
 export default function FloorItem(props) {
+  const floorId = props.floor.id;
+  const siteId = props.siteid;
+  const handleClick = () => {
+    console.log("clicked");
+    console.log(floorId, siteId);
+    window.location.href = `/rooms/${siteId}/${floorId}`;
+  };
   return (
-    <div className="xl:w-1/3 md:w-1/2 p-4">
+    <div onClick={handleClick} className="xl:w-1/3 md:w-1/2 p-4">
       <div className="border border-gray-200 p-6 rounded-lg">
         <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-red-100 text-red-500 mb-4">
           {/* <svg

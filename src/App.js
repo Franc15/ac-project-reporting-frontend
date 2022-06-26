@@ -19,7 +19,7 @@ export default function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/sites" element={<Sites />} />
           <Route path="/floors/:siteid" element={<Floors />} />
-          <Route path="/rooms" element={<Rooms />} />
+          <Route path="/rooms/:siteid/:floorid" element={<Rooms />} />
           <Route path="/items" element={<MainItems />} />
         </Route>
       </Routes>

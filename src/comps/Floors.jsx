@@ -25,6 +25,8 @@ export default function Floors() {
   };
   useEffect(() => {
     getFloors();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -40,7 +42,7 @@ export default function Floors() {
         </div>
         <div className="flex flex-wrap -m-4">
           {floors.map((floor) => {
-            return <FloorItem floor={floor} />;
+            return <FloorItem floor={floor} siteid={siteid} />;
           })}
         </div>
         <button className="flex mx-auto mt-16 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">
