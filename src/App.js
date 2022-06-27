@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/sites" element={<Sites />} />
           <Route path="/floors/:siteid" element={<Floors />} />
           <Route path="/rooms/:siteid/:floorid" element={<Rooms />} />
-          <Route path="/items" element={<MainItems />} />
+          <Route path="/items/:id" element={<MainItems />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -44,7 +44,7 @@ export default function Rooms() {
         <div class="flex flex-wrap -m-2">
           {rooms.length > 0 &&
             rooms.map((room) => {
-              return <RoomItem room={room} />;
+              return <RoomItem room={room} siteid={siteid} floorid={floorid} />;
             })}
         </div>
       </div>
