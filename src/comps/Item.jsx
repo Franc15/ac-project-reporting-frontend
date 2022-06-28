@@ -7,7 +7,7 @@ export default function Item(props) {
   const [isDisabled, setIsDisabled] = useState();
   const [isDone, setIsDone] = useState();
 
-  const getDetails = () => {
+  const getDetails = (async) => {
     Axios.get(`${API_URL}/record/check/${props.item.id}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -64,7 +64,7 @@ export default function Item(props) {
   return isDone ? (
     <div className="p-2 lg:w-1/5 md:w-1/4 w-full">
       <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-        <div className="flex-grow bg-red-300">
+        <div className="flex-grow">
           <label class="block text-gray-800 font-bold">
             <input
               class="mr-2 leading-tight"
@@ -74,7 +74,7 @@ export default function Item(props) {
               onChange={handleClick}
               disabled={isDisabled}
             />
-            <span class="text-sm">{`${props.item.brand_name} - ${props.item.type_name} - ${props.item.btu}`}</span>
+            <span class="text-sm line-through">{`${props.item.brand_name} - ${props.item.type_name} - ${props.item.btu}`}</span>
           </label>
         </div>
         <p id={"feed" + props.item.id}></p>
