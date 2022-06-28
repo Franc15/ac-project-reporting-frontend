@@ -1,7 +1,36 @@
 import Axios from "axios";
 import { API_URL } from "../utils/links";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Item(props) {
+  const [isDisabled, setIsDisabled] = useState();
+  const getDetails = () => {
+    Axios.get(`${API_URL}/record/check/${props.item.id}`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.norecord) {
+          console.log("It's a new record");
+          setIsDisabled(false);
+        } else {
+          setIsDisabled(true);
+          console.log("Records added already");
+        }
+        // setIsDisabled(res.data.isDisabled);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getDetails();
+  }, []);
+
   const handleClick = () => {
     // get the checkbox value
     const checkbox = document.getElementById("checkbox" + props.item.id);
@@ -41,6 +70,8 @@ export default function Item(props) {
               value={props.item.id}
               type="checkbox"
               onChange={handleClick}
+              disabled={isDisabled}
+              checked={isDisabled}
             />
             <span class="text-sm">{`${props.item.brand_name} - ${props.item.type_name} - ${props.item.btu}`}</span>
           </label>
