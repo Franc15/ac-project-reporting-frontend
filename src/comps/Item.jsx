@@ -6,22 +6,21 @@ export default function Item(props) {
     // get the checkbox value
     const checkbox = document.getElementById("checkbox" + props.item.id);
 
-    const ac_id = props.item.id;
-    const date = new Date("yyyy-MM-dd");
-    const quarter = 3;
-
     // check if checkbox is checked
     if (checkbox.checked) {
-      Axios.post(`${API_URL}/record/add`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Axios.post(
+        `${API_URL}/record/add`,
+        {
+          ac_id: props.item.id,
+          quarter: 3,
+          date_done: new Date().toISOString().slice(0, 10),
         },
-        data: {
-          ac_id,
-          date,
-          quarter,
-        },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      )
         .then((res) => {
           console.log(res);
         })
