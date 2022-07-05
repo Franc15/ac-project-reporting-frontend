@@ -35,7 +35,7 @@ export default function MainItems() {
             List of Air Conditioners
           </h1>
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Here is the list of rooms in NBAA: Auditors Performance 801
+            Here is the list of ACs in the room
           </p>
         </div>
         <div class="flex flex-wrap -m-2">

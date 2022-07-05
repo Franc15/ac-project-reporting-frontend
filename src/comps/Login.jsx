@@ -5,14 +5,18 @@ import auth from "../auth";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setLoading(true);
     auth.login(username, password);
+    setLoading(false);
   };
 
   if (auth.loggedIn()) {
+    setLoading(false);
     return <Navigate to="/sites" />;
   }
   return (
@@ -85,9 +89,9 @@ export default function Login() {
             <button className="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">
               Sign In
             </button>
-            <p className="text-xs text-gray-500 mt-3">
-              We are signing you in...
-            </p>
+            {loading ? (
+              <p className="text-xs text-gray-500 mt-3">Logging in...</p>
+            ) : null}
           </form>
         </div>
       </div>

@@ -38,7 +38,7 @@ export default function Rooms() {
             Rooms
           </h1>
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-            Here is the list of rooms in the 8th floor of Samora NAOT Building
+            Here is the list of rooms in this floor
           </p>
         </div>
         <div class="flex flex-wrap -m-2">

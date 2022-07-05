@@ -29,7 +29,7 @@ export default function Sites() {
     <section class="text-gray-600 body-font">
       <div className="p-4">
         <h1 className="text-4xl font-large title-font mb-4 text-gray-900">
-          Hello partner
+          Hello partner {JSON.parse(localStorage.getItem("user")).firstname}
         </h1>
         <p className="text-base leading-relaxed text-gray-600">
           Here are the sites you have access to

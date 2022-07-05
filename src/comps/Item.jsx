@@ -2,12 +2,14 @@ import Axios from "axios";
 import { API_URL } from "../utils/links";
 import { useState } from "react";
 import { useEffect } from "react";
+import Modal from "./Modal";
 
-export default function Item(props) {
+function Item(props) {
   const [isDisabled, setIsDisabled] = useState();
   const [isDone, setIsDone] = useState();
+  const [showModal, setShowModal] = useState(false);
 
-  const getDetails = (async) => {
+  const getDetails = () => {
     Axios.get(`${API_URL}/record/check/${props.item.id}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
@@ -31,9 +33,17 @@ export default function Item(props) {
       });
   };
 
+  const hideModal = () => {
+    setShowModal(false);
+  };
+
   useEffect(() => {
     getDetails();
   }, []);
+
+  const displayModal = () => {
+    setShowModal(true);
+  };
 
   const handleClick = () => {
     const checkbox = document.getElementById("checkbox" + props.item.id);
@@ -71,7 +81,8 @@ export default function Item(props) {
               id={"checkbox" + props.item.id}
               value={props.item.id}
               type="checkbox"
-              onChange={handleClick}
+              // onChange={handleClick}
+              onChange={displayModal}
               disabled={isDisabled}
             />
             <span class="text-sm line-through">{`${props.item.brand_name} - ${props.item.type_name} - ${props.item.btu}`}</span>
@@ -90,14 +101,24 @@ export default function Item(props) {
               id={"checkbox" + props.item.id}
               value={props.item.id}
               type="checkbox"
-              onChange={handleClick}
+              // onChange={handleClick}
+              onChange={displayModal}
               disabled={isDisabled}
             />
             <span class="text-sm">{`${props.item.brand_name} - ${props.item.type_name} - ${props.item.btu}`}</span>
           </label>
         </div>
-        <p id={"feed" + props.item.id}></p>
+        <>
+          {showModal ? (
+            <Modal
+              hideModal={hideModal}
+              handleClick={handleClick}
+              id={props.item.id}
+            />
+          ) : null}
+        </>
       </div>
     </div>
   );
 }
+export default Item;
