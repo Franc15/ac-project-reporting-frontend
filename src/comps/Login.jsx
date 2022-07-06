@@ -17,7 +17,7 @@ export default function Login() {
 
   if (auth.loggedIn()) {
     setLoading(false);
-    return <Navigate to="/sites" />;
+    return <Navigate to="/" />;
   }
   return (
     <section className="text-gray-600 body-font relative">
