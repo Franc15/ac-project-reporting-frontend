@@ -25,10 +25,6 @@ export default function FloorItem(props) {
         <h2 className="text-lg text-gray-900 font-medium title-font mb-2">
           {props.floor.floor_level_name}
         </h2>
-        <p className="leading-relaxed text-base">
-          Fingerstache flexitarian street art 8-bit waist co, subway tile poke
-          farm.
-        </p>
       </div>
     </div>
   );
