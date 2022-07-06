@@ -8,9 +8,9 @@ class Auth {
   }
 
   async getQuarter() {
-    Axios.get(`${API_URL}/admin/quarter`)
+    Axios.get(`https://ar-backend-ua6tbwojpa-uc.a.run.app/api/admin/quarter`)
       .then((res) => {
-        console.log(res);
+        console.log("Result" + res);
         localStorage.setItem("current-quarter", res.data[0].quarter_name);
         console.log("CURRENT QUARTER" + res.data[0].quarter_name);
       })
@@ -35,7 +35,7 @@ class Auth {
           this.token = res.data.token;
           this.user = res.data.user;
 
-          window.location.href = "/sites";
+          window.location.href = "/";
         }
       })
       .catch((err) => {

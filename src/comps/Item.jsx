@@ -59,7 +59,7 @@ function Item(props) {
         `${API_URL}/record/add`,
         {
           ac_id: props.item.id,
-          quarter: currentQuarter,
+          quarter: localStorage.getItem("current-quarter"),
           date_done: new Date().toISOString().slice(0, 10),
         },
         {
@@ -120,7 +120,7 @@ function Item(props) {
               hideModal={hideModal}
               handleClick={handleClick}
               id={props.item.id}
-              quarter={currentQuarter}
+              quarter={localStorage.getItem("current-quarter")}
             />
           ) : null}
         </>
