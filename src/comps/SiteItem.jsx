@@ -1,6 +1,58 @@
 import { Link } from "react-router-dom";
+import { API_URL } from "../utils/links";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 
 export default function SiteItem(props) {
+  const [totalAC, setTotalAC] = useState(0);
+  const [totalServiced, setTotalServiced] = useState(0);
+  const [currentQ, setCurrentQ] = useState("");
+
+  const getCurrentQ = async () => {
+    Axios.get(`${API_URL}/admin/quarter`)
+      .then((res) => {
+        console.log(res);
+        setCurrentQ(res.data[0].quarter_name);
+        console.log("CURRENT QUARTER" + res.data[0].quarter_name);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getTotalServiced = async () => {
+    Axios.get(
+      `${API_URL}/admin/site/serviced/${props.site.site_id}/${currentQ}`
+    )
+      .then((res) => {
+        console.log(res);
+        setTotalServiced(res.data[0].count);
+        console.log("TOTLLL" + JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getTotalAC = async () => {
+    // get the number of ac in this site
+    Axios.get(`${API_URL}/admin/ac/site/${props.site.site_id}`)
+      .then((res) => {
+        // console.log(res.data);
+        setTotalAC(res.data[0].count);
+        console.log("TOTAL AC" + res.data[0].count);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getCurrentQ();
+    getTotalAC();
+    getTotalServiced();
+  }, []);
+
   return (
     <div className="p-4 md:w-1/3">
       <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
@@ -16,10 +68,10 @@ export default function SiteItem(props) {
           <h1 className="title-foNament text-lg font-medium text-gray-900 mb-3">
             {props.site.site_name}
           </h1>
-          <p className="leading-relaxed mb-3">
+          {/* <p className="leading-relaxed mb-3">
             Located in Dar es salaam. At the moment we are working on servicing
             the AC for the third quarter.
-          </p>
+          </p> */}
           <div className="flex items-center flex-wrap ">
             <Link
               to={`/floors/${props.site.site_id}`}
@@ -40,10 +92,10 @@ export default function SiteItem(props) {
               </svg>
             </Link>
             <span className="text-yellow-400 mr-3 font-bold inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-              60
+              {totalServiced}
             </span>
             <span className="text-green-400 font-bold inline-flex items-center leading-none text-sm">
-              94
+              {totalAC}
             </span>
           </div>
         </div>
