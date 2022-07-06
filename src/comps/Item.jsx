@@ -6,6 +6,7 @@ import Modal from "./Modal";
 
 function Item(props) {
   const [isDisabled, setIsDisabled] = useState();
+  const [currentQuarter, setCurrentQuarter] = useState("");
   const [isDone, setIsDone] = useState();
   const [showModal, setShowModal] = useState(false);
 
@@ -33,12 +34,26 @@ function Item(props) {
       });
   };
 
+  // get the current quarter
+  const getQuarter = () => {
+    Axios.get(`${API_URL}/admin/quarter`)
+      .then((res) => {
+        console.log(res);
+        setCurrentQuarter(res.data[0].quarter_name);
+        console.log("CURRENT QUARTER" + res.data[0].quarter_name);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const hideModal = () => {
     setShowModal(false);
   };
 
   useEffect(() => {
     getDetails();
+    getQuarter();
   }, []);
 
   const displayModal = () => {
@@ -53,7 +68,7 @@ function Item(props) {
         `${API_URL}/record/add`,
         {
           ac_id: props.item.id,
-          quarter: 3,
+          quarter: currentQuarter,
           date_done: new Date().toISOString().slice(0, 10),
         },
         {
@@ -114,6 +129,7 @@ function Item(props) {
               hideModal={hideModal}
               handleClick={handleClick}
               id={props.item.id}
+              quarter={currentQuarter}
             />
           ) : null}
         </>

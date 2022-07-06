@@ -11,7 +11,7 @@ export default function Modal(props) {
       `${API_URL}/record/add`,
       {
         ac_id: props.id,
-        quarter: 3,
+        quarter: props.quarter,
         date_done: new Date().toISOString().slice(0, 10),
         remarks: remarks,
         replaced: replaced,
@@ -25,6 +25,7 @@ export default function Modal(props) {
     )
       .then((res) => {
         console.log(res);
+        window.location.reload();
       })
       .catch((err) => {
         console.log(err);
