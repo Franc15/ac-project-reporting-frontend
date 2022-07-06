@@ -11,7 +11,7 @@ function Item(props) {
   const [showModal, setShowModal] = useState(false);
 
   const getDetails = () => {
-    Axios.get(`${API_URL}/record/check/${props.item.id}`, {
+    Axios.get(`${API_URL}/record/check/${props.item.id}/${currentQuarter}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
@@ -52,8 +52,8 @@ function Item(props) {
   };
 
   useEffect(() => {
-    getDetails();
     getQuarter();
+    getDetails();
   }, []);
 
   const displayModal = () => {
