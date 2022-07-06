@@ -6,16 +6,21 @@ import Modal from "./Modal";
 
 function Item(props) {
   const [isDisabled, setIsDisabled] = useState();
-  const [currentQuarter, setCurrentQuarter] = useState("");
+  // const [currentQuarter, setCurrentQuarter] = useState("");
   const [isDone, setIsDone] = useState();
   const [showModal, setShowModal] = useState(false);
 
   const getDetails = () => {
-    Axios.get(`${API_URL}/record/check/${props.item.id}/${currentQuarter}`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
+    Axios.get(
+      `${API_URL}/record/check/${props.item.id}/${localStorage.getItem(
+        "current-quarter"
+      )}`,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    )
       .then((res) => {
         console.log(res);
         if (res.data.norecord) {
@@ -34,25 +39,11 @@ function Item(props) {
       });
   };
 
-  // get the current quarter
-  const getQuarter = () => {
-    Axios.get(`${API_URL}/admin/quarter`)
-      .then((res) => {
-        console.log(res);
-        setCurrentQuarter(res.data[0].quarter_name);
-        console.log("CURRENT QUARTER" + res.data[0].quarter_name);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   const hideModal = () => {
     setShowModal(false);
   };
 
   useEffect(() => {
-    getQuarter();
     getDetails();
   }, []);
 

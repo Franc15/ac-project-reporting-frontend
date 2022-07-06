@@ -7,6 +7,18 @@ class Auth {
     this.user = null;
   }
 
+  async getQuarter() {
+    Axios.get(`${API_URL}/admin/quarter`)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("current-quarter", res.data[0].quarter_name);
+        console.log("CURRENT QUARTER" + res.data[0].quarter_name);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   async login(username, password) {
     Axios.post(`${API_URL}/login`, {
       username,
@@ -19,6 +31,7 @@ class Auth {
           console.log(res.data);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("user", JSON.stringify(res.data.user));
+          this.getQuarter();
           this.token = res.data.token;
           this.user = res.data.user;
 
