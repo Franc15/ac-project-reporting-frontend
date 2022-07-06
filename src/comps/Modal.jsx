@@ -7,8 +7,6 @@ export default function Modal(props) {
   const [replaced, setReplaced] = useState("");
 
   const saveRecord = () => {
-    if (localStorage.getItem("current-quarter") === "") {
-    }
     // console.log("Quarter" + localStorage.getItem("current-quarter"));
     Axios.post(
       `${API_URL}/record/add`,

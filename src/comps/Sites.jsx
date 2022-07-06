@@ -32,7 +32,8 @@ export default function Sites() {
           Hello partner {JSON.parse(localStorage.getItem("user")).firstname}
         </h1>
         <p className="text-base leading-relaxed text-gray-600">
-          Here are the sites you have access to
+          Here are the sites you have access to. Currently, quarter{" "}
+          {localStorage.getItem("current-quarter")} is in progress.
         </p>
       </div>
       <div className="container px-5 py-12 mx-auto">
